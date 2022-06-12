@@ -1,0 +1,27 @@
+int fun(int id,int sum,int arr[], vector<vector<int>>&dp)
+{
+   
+    if(id==0)
+    {
+        //if sum is 0 and arr[0] is also 0 then to case will arise 
+        //eighter take or not take both will be true hence return true-
+        
+       if(sum==0&&arr[0]==0)return 2; 
+       
+    //if sum = 0 abd arr[0] is not equal to 0 dont take it only one case possible
+    //if arr[0]== sum==non-zero element only one condition take it possible
+     else if(sum==0||arr[0]==sum)return 1;
+      else
+        return 0;
+        
+    }
+    
+    if(dp[id][sum]!=-1)return dp[id][sum];
+    
+    int ntake=fun(id-1,sum,arr,dp);
+    int take=0;
+    if(arr[id]<=sum){
+    take=fun(id-1,sum-arr[id],arr,dp);}
+    
+   return dp[id][sum]=(take+ntake)%1000000007;
+}
